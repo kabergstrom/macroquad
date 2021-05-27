@@ -138,7 +138,7 @@ use crate::{
 
 use glam::{vec2, Mat4, Vec2};
 
-struct Context {
+pub struct Context {
     quad_context: QuadContext,
     audio_context: audio::AudioContext,
 
@@ -367,12 +367,16 @@ impl Context {
 
         self.gl.draw(&mut self.quad_context, matrix);
     }
+
+    pub fn quad_context_mut(&mut self) -> &mut miniquad::Context {
+        &mut self.quad_context
+    }
 }
 
 #[no_mangle]
 static mut CONTEXT: Option<Context> = None;
 
-fn get_context() -> &'static mut Context {
+pub fn get_context() -> &'static mut Context {
     unsafe { CONTEXT.as_mut().unwrap_or_else(|| panic!()) }
 }
 

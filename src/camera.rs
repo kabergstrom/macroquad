@@ -15,6 +15,7 @@ pub trait Camera {
 }
 
 #[derive(Clone, Copy)]
+#[repr(C)]
 pub struct Camera2D {
     /// Rotation in degrees
     pub rotation: f32,
